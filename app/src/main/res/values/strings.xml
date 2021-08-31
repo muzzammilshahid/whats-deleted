@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">DMR</string>
+    <string name="title_activity_first_screen">FirstScreen</string>
+    <string name="tab_chat">chats</string>
+    <string name="tab_images">images</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="this_message_was_deleted">This message was deleted</string>
+    <string name="deleted_a_message"> deleted a message.</string>
+
+    <string name="allow_me">Allow me</string>
+    <string name="read_message">Please allow me to read notifications inorder to read deleted messages</string>
+    <string name="sure">sure</string>
+
+    <string name="notification_listener">Notification Listener</string>
+    <string name="notification_listener_message">Notification Listener Service has unfortunately stopped. Please disable the Service and enable again.</string>
+
+
+    <string name="are_you_sure_you_want_to_delete_this_chat">Are you sure you want to delete chat?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+</resources>

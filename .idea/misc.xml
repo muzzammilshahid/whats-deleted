@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable-v24/ic_baseline_menu_24.xml" value="0.29333333333333333" />
+        <entry key="app/src/main/res/drawable-v24/ic_cross.xml" value="0.16458333333333333" />
+        <entry key="app/src/main/res/drawable-v24/text.xml" value="0.29074074074074074" />
+        <entry key="app/src/main/res/drawable/ic_menu.xml" value="0.29333333333333333" />
+        <entry key="app/src/main/res/layout/activity_first_screen.xml" value="0.28177083333333336" />
+        <entry key="app/src/main/res/layout/activity_full_image.xml" value="0.28177083333333336" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.28177083333333336" />
+        <entry key="app/src/main/res/layout/activity_message.xml" value="0.28177083333333336" />
+        <entry key="app/src/main/res/layout/activity_message_instagram.xml" value="0.28177083333333336" />
+        <entry key="app/src/main/res/layout/activity_message_telegram.xml" value="0.28177083333333336" />
+        <entry key="app/src/main/res/layout/custom_action_bar.xml" value="0.28177083333333336" />
+        <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.28177083333333336" />
+        <entry key="app/src/main/res/layout/fragment_chat_instagram.xml" value="0.28177083333333336" />
+        <entry key="app/src/main/res/layout/fragment_chat_telegram.xml" value="0.28177083333333336" />
+        <entry key="app/src/main/res/layout/fragment_first_screen.xml" value="0.28177083333333336" />
+        <entry key="app/src/main/res/layout/fragment_images.xml" value="0.28177083333333336" />
+        <entry key="app/src/main/res/layout/fragment_images_instagram.xml" value="0.2671875" />
+        <entry key="app/src/main/res/layout/fragment_images_telegram.xml" value="0.28177083333333336" />
+        <entry key="app/src/main/res/layout/fragment_tabbed.xml" value="0.28177083333333336" />
+        <entry key="app/src/main/res/layout/image_layout.xml" value="0.28177083333333336" />
+        <entry key="app/src/main/res/layout/listview_chat.xml" value="0.28177083333333336" />
+        <entry key="app/src/main/res/layout/listview_chat_instagram.xml" value="0.28177083333333336" />
+        <entry key="app/src/main/res/layout/listview_message.xml" value="0.28177083333333336" />
+        <entry key="app/src/main/res/layout/main_nav_drawer.xml" value="0.25" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

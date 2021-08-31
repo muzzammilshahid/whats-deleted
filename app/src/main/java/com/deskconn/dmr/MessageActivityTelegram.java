@@ -57,7 +57,6 @@ public class MessageActivityTelegram extends AppCompatActivity {
 
         messageList = new LinkedList<>(Arrays.asList(messageArray));
 
-
         time = roomDB.mainDao().getAllTimeTelegram(name);
         String[] timeArray = time.split(",");
 

@@ -50,37 +50,44 @@ public class NotificationListener extends NotificationListenerService {
 
             WhatsappData data = new WhatsappData();
 
+            String title = sbn.getNotification().extras.getString("android.title");
+            String text = sbn.getNotification().extras.getString("android.text");
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 Icon icon = sbn.getNotification().getLargeIcon();
                 try {
                     Drawable drawable = icon.loadDrawable(getApplicationContext());
                     Bitmap bitmap = convertToBitmap(drawable, 120, 120);
-                    saveToInternalStorage(bitmap, sbn.getNotification().extras.getString("android.title"),
+                    saveToInternalStorage(bitmap, title,
                             Environment.getExternalStorageDirectory() + "/DMR/WhatsApp/Profile Images");
-                    if (sbn.getNotification().extras.getString("android.title") != null
-                            && sbn.getNotification().extras.getString("android.text") != null) {
-                        if (sbn.getNotification().extras.getString("android.text")
-                                .equals(getString(R.string.this_message_was_deleted))) {
-                            showNotification(getApplicationContext(), sbn.getNotification()
-                                            .extras.getString("android.title") + getString(R.string.deleted_a_message),
+                    if (title != null && text != null) {
+                        if (text.equals(getString(R.string.this_message_was_deleted))) {
+                            showNotification(getApplicationContext(), title + getString(R.string.deleted_a_message),
                                     "DMR");
                         }
+                        if (title.contains(":")){
+                            String[] stringTitle = title.split(":");
+                            title = stringTitle[0].trim();
+                            if (title.contains("(")){
+                                String[] strTitle = title.split("\\(");
+                                title = strTitle[0].trim();
+                            }
+                            text = stringTitle[1] + " : " + text;
 
-                        data.setName(sbn.getNotification().extras.getString("android.title"));
+                        }
+
+                        data.setName(title);
                         DateFormat dateFormat = new SimpleDateFormat("hh.mm aa");
                         System.out.println("getting  " + dateFormat.format(Calendar.getInstance().getTime()));
-                        if (database.mainDao().getAllMessages(sbn.getNotification().extras.getString("android.title")) == null) {
-                            data.setMessages(sbn.getNotification().extras.getString("android.text"));
+                        if (database.mainDao().getAllMessages(title) == null) {
+                            data.setMessages(text);
                             data.setTime(dateFormat.format(Calendar.getInstance().getTime()));
                         } else {
-                            data.setMessages(database.mainDao().getAllMessages(sbn.getNotification()
-                                    .extras.getString("android.title")) + "," + sbn.getNotification()
-                                    .extras.getString("android.text"));
-                            data.setTime(database.mainDao().getAllTime(sbn.getNotification()
-                                    .extras.getString("android.title")) + "," +
+                            data.setMessages(database.mainDao().getAllMessages(title) + "," + text);
+                            data.setTime(database.mainDao().getAllTime(title) + "," +
                                     dateFormat.format(Calendar.getInstance().getTime()));
                         }
-                        data.setImage(saveToInternalStorage(bitmap, sbn.getNotification().extras.getString("android.title").trim(),
+                        data.setImage(saveToInternalStorage(bitmap, title.trim(),
                                 Environment.getExternalStorageDirectory() + "/DMR/WhatsApp/Profile Images"));
                         database.mainDao().insert(data);
                     }

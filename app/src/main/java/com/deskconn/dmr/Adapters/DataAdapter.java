@@ -45,7 +45,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
         viewHolder.img.setOnLongClickListener(v -> {
             MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(context);
-            builder.setMessage(R.string.are_you_sure_you_want_to_delete_this_chat);
+            builder.setMessage(R.string.are_you_sure_you_want_to_delete_this_image);
             builder.setPositiveButton(R.string.yes, (dialog, which) -> {
                 File file = new File(imageUrls.get(i).getImageUrl());
                 boolean deleted = file.delete();

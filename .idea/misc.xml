@@ -6,6 +6,7 @@
         <entry key="app/src/main/res/drawable-v24/ic_baseline_menu_24.xml" value="0.29333333333333333" />
         <entry key="app/src/main/res/drawable-v24/ic_cross.xml" value="0.16458333333333333" />
         <entry key="app/src/main/res/drawable-v24/text.xml" value="0.29074074074074074" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.16458333333333333" />
         <entry key="app/src/main/res/drawable/ic_menu.xml" value="0.29333333333333333" />
         <entry key="app/src/main/res/layout/activity_first_screen.xml" value="0.28177083333333336" />
         <entry key="app/src/main/res/layout/activity_full_image.xml" value="0.28177083333333336" />
@@ -27,6 +28,7 @@
         <entry key="app/src/main/res/layout/listview_chat_instagram.xml" value="0.28177083333333336" />
         <entry key="app/src/main/res/layout/listview_message.xml" value="0.28177083333333336" />
         <entry key="app/src/main/res/layout/main_nav_drawer.xml" value="0.25" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.27037037037037037" />
       </map>
     </option>
   </component>

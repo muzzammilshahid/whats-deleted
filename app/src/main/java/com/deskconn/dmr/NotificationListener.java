@@ -59,8 +59,8 @@ public class NotificationListener extends NotificationListenerService {
                     Drawable drawable = icon.loadDrawable(getApplicationContext());
                     Bitmap bitmap = convertToBitmap(drawable, 120, 120);
                     saveToInternalStorage(bitmap, title,
-                            Environment.getExternalStorageDirectory() + "/DMR/WhatsApp/Profile Images");
-                    if (title != null && text != null) {
+                            Environment.getExternalStorageDirectory() + "/DMR/WhatsApp/.Profile Images");
+                    if (title != null && text != null && !title.trim().equals("You") ) {
                         if (text.equals(getString(R.string.this_message_was_deleted))) {
                             showNotification(getApplicationContext(), title + getString(R.string.deleted_a_message),
                                     "DMR");
@@ -78,7 +78,6 @@ public class NotificationListener extends NotificationListenerService {
 
                         data.setName(title);
                         DateFormat dateFormat = new SimpleDateFormat("hh.mm aa");
-                        System.out.println("getting  " + dateFormat.format(Calendar.getInstance().getTime()));
                         if (database.mainDao().getAllMessages(title) == null) {
                             data.setMessages(text);
                             data.setTime(dateFormat.format(Calendar.getInstance().getTime()));
@@ -88,11 +87,11 @@ public class NotificationListener extends NotificationListenerService {
                                     dateFormat.format(Calendar.getInstance().getTime()));
                         }
                         data.setImage(saveToInternalStorage(bitmap, title.trim(),
-                                Environment.getExternalStorageDirectory() + "/DMR/WhatsApp/Profile Images"));
+                                Environment.getExternalStorageDirectory() + "/DMR/WhatsApp/.Profile Images"));
                         database.mainDao().insert(data);
                     }
                 } catch (Exception e) {
-                    System.out.println("lmnb inside catch");
+                    e.printStackTrace();
                 }
 
             }
@@ -103,28 +102,43 @@ public class NotificationListener extends NotificationListenerService {
         if (sbn.getPackageName().equals("org.telegram.messenger")) {
             TelegramData telegramData = new TelegramData();
 
+            String title = sbn.getNotification().extras.getString("android.title");
+            String text = sbn.getNotification().extras.getString("android.text");
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 try {
-                    if (!sbn.getNotification().extras.getString("android.title").trim().equals("Telegram")) {
-                        if (!sbn.getNotification().extras.getString("android.title").trim().equals("Reminder")) {
-                            if (sbn.getNotification().extras.getString("android.title") != null
-                                    && sbn.getNotification().extras.getString("android.text") != null) {
-                                telegramData.setName(sbn.getNotification().extras.getString("android.title"));
+                    if (!title.trim().equals("Telegram")) {
+                        if (!title.trim().equals("Reminder") && !title.trim().equals("Telegram Call")
+                                && !title.trim().equals("Ongoing Telegram call")
+                                && !title.trim().equals("Telegram Video Call")
+                                && !title.trim().equals("You")) {
+                            if (title != null && text != null) {
+
+                                if (title.contains(":")){
+                                    String[] stringTitle = title.split(":");
+                                    title = stringTitle[0].trim();
+                                    if (title.contains("(")){
+                                        String[] strTitle = title.split("\\(");
+                                        title = strTitle[0].trim();
+                                    }
+                                    text = stringTitle[1] + " : " + text;
+
+                                }
+
+                                telegramData.setName(title);
                                 DateFormat dateFormat = new SimpleDateFormat("hh.mm aa");
-                                if (database.mainDao().getAllMessagesTelegram(sbn.getNotification()
-                                        .extras.getString("android.title")) == null) {
-                                    telegramData.setMessages(sbn.getNotification().extras.getString("android.text"));
+                                if (database.mainDao().getAllMessagesTelegram(title) == null) {
+                                    telegramData.setMessages(text);
                                     telegramData.setTime(dateFormat.format(Calendar.getInstance().getTime()));
                                 } else {
-                                    telegramData.setMessages(database.mainDao().getAllMessagesTelegram(sbn.getNotification().extras.getString("android.title")) + "," + sbn.getNotification().extras.getString("android.text"));
-                                    telegramData.setTime(database.mainDao().getAllTimeTelegram(sbn.getNotification().extras.getString("android.title")) + "," + dateFormat.format(Calendar.getInstance().getTime()));
+                                    telegramData.setMessages(database.mainDao().getAllMessagesTelegram(title) + "," + text);
+                                    telegramData.setTime(database.mainDao().getAllTimeTelegram(title) + "," + dateFormat.format(Calendar.getInstance().getTime()));
                                 }
                                 database.mainDao().insert(telegramData);
                             }
                         }
                     }
                 } catch (Exception e) {
-                    System.out.println("lmnb inside catch");
+                    e.printStackTrace();
                 }
 
 
@@ -135,25 +149,35 @@ public class NotificationListener extends NotificationListenerService {
         if (sbn.getPackageName().equals("com.instagram.android")) {
 
             InstagramData instagramData = new InstagramData();
+
+            String title = sbn.getNotification().extras.getString("android.title");
+            String text = sbn.getNotification().extras.getString("android.text");
+
+            System.out.println("This "+ title);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 try {
-                    if (!sbn.getNotification().extras.getString("android.title").trim().equals("Instagram")) {
-                        if (sbn.getNotification().extras.getString("android.title") != null
-                                && sbn.getNotification().extras.getString("android.text") != null) {
-                            instagramData.setName(sbn.getNotification().extras.getString("android.title"));
+                    if (!title.trim().equals("Instagram")
+                            && !title.trim().equals("Instagram Audio Call")
+                            && !title.trim().equals("Instagram Video Chat")) {
+                        if (title != null && text != null) {
+                            if (text.contains(":") && !text.contains(title)) {
+                                String[] stringText = text.split(":");
+                                text = stringText[1].trim();
+                            }
+                            instagramData.setName(title);
                             DateFormat dateFormat = new SimpleDateFormat("hh.mm aa");
-                            if (database.mainDao().getAllMessagesInstagram(sbn.getNotification().extras.getString("android.title")) == null) {
-                                instagramData.setMessages(sbn.getNotification().extras.getString("android.text"));
+                            if (database.mainDao().getAllMessagesInstagram(title) == null) {
+                                instagramData.setMessages(text);
                                 instagramData.setTime(dateFormat.format(Calendar.getInstance().getTime()));
                             } else {
-                                instagramData.setMessages(database.mainDao().getAllMessagesInstagram(sbn.getNotification().extras.getString("android.title")) + "," + sbn.getNotification().extras.getString("android.text"));
-                                instagramData.setTime(database.mainDao().getAllTimeInstagram(sbn.getNotification().extras.getString("android.title")) + "," + dateFormat.format(Calendar.getInstance().getTime()));
+                                instagramData.setMessages(database.mainDao().getAllMessagesInstagram(title) + "," + text);
+                                instagramData.setTime(database.mainDao().getAllTimeInstagram(title) + "," + dateFormat.format(Calendar.getInstance().getTime()));
                             }
                             database.mainDao().insert(instagramData);
                         }
                     }
                 } catch (Exception e) {
-                    System.out.println("lmnb inside catch");
+                    e.printStackTrace();
                 }
             }
         }

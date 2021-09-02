@@ -52,7 +52,7 @@ public class FirstScreen extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE}, 1);
         }
 
-        File directory = new File(Environment.getExternalStorageDirectory() + "/DMR/WhatsApp/Profile Images");
+        File directory = new File(Environment.getExternalStorageDirectory() + "/DMR/WhatsApp/.Profile Images");
         if (!directory.exists()) {
             directory.mkdirs();
             System.out.println("prepare " + directory.mkdirs());
@@ -187,7 +187,7 @@ public class FirstScreen extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == 1) {// If request is cancelled, the result arrays are empty.
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                File directory = new File(Environment.getExternalStorageDirectory() + "/DMR/WhatsApp/Profile Images");
+                File directory = new File(Environment.getExternalStorageDirectory() + "/DMR/WhatsApp/.Profile Images");
                 if (!directory.exists()) {
                     directory.mkdirs();
                     System.out.println("prepare " + directory.mkdirs());

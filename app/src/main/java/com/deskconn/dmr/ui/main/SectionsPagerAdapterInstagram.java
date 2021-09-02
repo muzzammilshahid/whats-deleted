@@ -10,11 +10,10 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.deskconn.dmr.R;
 import com.deskconn.dmr.fragments.ChatFragmentInstagram;
-import com.deskconn.dmr.fragments.ImagesFragmentInstagram;
 
 public class SectionsPagerAdapterInstagram extends FragmentPagerAdapter {
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_chat, R.string.tab_images};
+    private static final int[] TAB_TITLES = new int[]{R.string.tab_chat};
     private final Context mContext;
 
     public SectionsPagerAdapterInstagram(Context context, FragmentManager fm) {
@@ -29,9 +28,6 @@ public class SectionsPagerAdapterInstagram extends FragmentPagerAdapter {
             case 0:
                 fragment = new ChatFragmentInstagram();
                 break;
-            case 1:
-                fragment = new ImagesFragmentInstagram();
-                break;
         }
         return fragment;
     }
@@ -45,6 +41,6 @@ public class SectionsPagerAdapterInstagram extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         // Show 2 total pages.
-        return 2;
+        return 1;
     }
 }
